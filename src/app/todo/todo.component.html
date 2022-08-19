@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+            <div *ngIf="!isOnline" class="alert alert-warning" role="alert">
+                You are not connected to Internet!
+              </div>
+            <form novalidate [formGroup]="todoForm">
+                <div class="mb-3">
+                <label for="e" class="form-label">Task</label>
+                <input type="email" class="form-control" id="e" formControlName="task">
+                </div>
+                <div class="mb-3">
+                <label for="d" class="form-label">Detail</label>
+                <textarea class="form-control" id="d" rows="2" formControlName="detail"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="saveTodo()">Save</button>
+                <button *ngIf="dataInCache && isOnline" class="btn btn-warning float-end" (click)="syncData()">Sync</button> 
+        </form>
+
+        <h4 class="mt-5">Todo's!</h4>
+        <!-- <p>{{todoList | json}}</p> -->
+        <ul *ngFor="let todo of obj?.values(todoList);  index as i;">
+            <li>{{todo.task}} | {{todo.detail}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
